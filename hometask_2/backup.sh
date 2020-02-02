@@ -6,20 +6,21 @@ then
 	setterm -foreground red 
 	echo "Apropriate usege: backup.sh source_dir backup_dir"
 	setterm -foreground white 
-
+	exit 1
 fi
 if [[ !(-d $1) ]]
 then
 	setterm -foreground red 
 	echo "Source dir $1 does non exist"
 	setterm -foreground white 
-	
+	exit 2	
 fi
 if [[ !(-d $2) ]]
 then
 	setterm -foreground red 
 	echo "Backup dir $2 does non exist"
 	setterm -foreground white
+	exit 3
 fi
 
 
