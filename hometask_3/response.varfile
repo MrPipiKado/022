@@ -1,0 +1,8 @@
+app.confHome=/var/atlassian/application-data/confluence7_3_1
+app.install.service$Boolean=false
+portChoice=default
+launch.application$Boolean=false
+sys.adminRights$Boolean=true
+sys.confirmedUpdateInstallationString=false
+sys.installationDir=/opt/atlassian/confluence7_3_1
+sys.languageId=en

@@ -1,21 +1,20 @@
 #!/usr/bin/env bash
 apt-get update
-apt install -y default-jdk
-apt install -y default-jre
-apt-get upgrade -y
-echo "JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"" >> /etc/environment
-source /etc/environment
+apt-get install mysql-server -y
+sudo mysql -e 'use mysql;
 
-mkdir ~/confluence
-cd ~/confluence/
-if [[ !( -f atlassian-confluence-7.3.1.tar.gz ) ]]
-then 
-	wget https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-7.3.1.tar.gz
-fi
-tar -xzvf atlassian-confluence-7.3.1.tar.gz 
-chmod -R u=rwx,go-rwx ~/confluence/
-mkdir /var/confluence-home
-chmod -R u=rwx,go-rwx /var/confluence-home/
-echo -e "\nconfluence.home=/var/confluence-home" >> /root/confluence/atlassian-confluence-7.3.1/confluence/WEB-INF/classes/confluence-init.properties
-cd /root/confluence/atlassian-confluence-7.3.1/bin/
+update user set authentication_string=PASSWORD("123456") where User="root";
+
+flush privileges;
+
+CREATE DATABASE CONFLUENCE;
+
+quit'
+
+/etc/init.d/mysql start
+
+cd /vagrant 
+chmod +x atlassian-confluence-7.3.1-x64.bin
+./atlassian-confluence-7.3.1-x64.bin -q -varfile /vagrant/response.varfile
+cd /opt/atlassian/confluence7_3_1/bin
 ./start-confluence.sh
