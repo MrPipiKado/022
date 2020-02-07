@@ -19,7 +19,7 @@ config.vm.network :forwarded_port, guest: 3306, host: 3306
   config.disksize.size = '15GB'
   config.vm.provider "virtualbox" do |v|
       v.memory = 8192
-      v.cpus = 4
+      v.cpus = 2
   end
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
